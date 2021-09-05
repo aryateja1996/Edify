@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "914355352903",
+    "project_id": "edify-ff361",
+    "storage_bucket": "edify-ff361.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914355352903:android:fdc88ded345e0074760862",
+        "android_client_info": {
+          "package_name": "com.indiworks.edify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914355352903-j79o6226s5hj6jg1i9ehlqaa574v720b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzp-A8vuiZLPSJZEd5LCSBayjxcHfl73g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "914355352903-j79o6226s5hj6jg1i9ehlqaa574v720b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
