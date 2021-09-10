@@ -1,2 +1,10 @@
 export './splash.dart';
 export './login.dart';
+export './home.dart';
+export './subject.dart';
+export './syllabus.dart';
+export './cultural.dart';
+export './questions.dart';
+export './post.dart';
+export './queries.dart';
+export './pdfAndMore.dart';

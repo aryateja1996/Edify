@@ -22,6 +22,10 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Center(
+        child: Image(image: AssetImage('assets/splash.jpg')),
+      ),
+    );
   }
 }

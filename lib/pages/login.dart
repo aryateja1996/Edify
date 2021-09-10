@@ -1,4 +1,5 @@
 import 'package:edify/Theme.dart';
+import 'package:edify/pages/exports.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -69,7 +70,15 @@ class _LoginState extends State<Login> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Button(text: 'Login'),
+                        Button(
+                          text: 'Login',
+                          callback: () {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (context) => Home()),
+                                (route) => false);
+                          },
+                        ),
                       ],
                     ),
                   ],
