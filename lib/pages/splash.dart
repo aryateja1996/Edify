@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:edify/Theme.dart';
 import 'package:edify/pages/exports.dart';
+import 'package:edify/services/export.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatefulWidget {
@@ -15,8 +17,17 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
 
-    Timer(Duration(seconds: 3), () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+    Timer(Duration(seconds: 3), () async {
+      if (user != null) {
+        await getUserDetails();
+
+        String dateToday = date();
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Home()));
+      } else {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Login()));
+      }
     });
   }
 

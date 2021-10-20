@@ -1,16 +1,21 @@
 //import 'package:edify/pages/exports.dart';
 import 'package:edify/pages/exports.dart';
+import 'package:edify/services/export.dart';
 import 'package:flutter/material.dart';
 
-typedef InputChangedCallback = void Function(String text);
+//typedef InputChangedCallback = void Function(String text);
 
 class Input extends StatelessWidget {
   final String hint;
-  final InputChangedCallback changedCallback;
-  Input({this.hint, this.changedCallback});
+  final bool dontShow;
+  final TextInputType keytype;
+  //final InputChangedCallback changedCallback;
+  final Function changedCallback;
+  Input({this.hint, this.changedCallback, this.dontShow, this.keytype});
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: keytype,
       decoration: InputDecoration(
         hoverColor: Colors.cyan[700],
         focusColor: Colors.cyan[700],
@@ -23,6 +28,7 @@ class Input extends StatelessWidget {
           ),
         ),
       ),
+      obscureText: dontShow == null ? false : dontShow,
       onChanged: this.changedCallback,
     );
   }
@@ -68,6 +74,14 @@ class Burger extends StatefulWidget {
 }
 
 class _BurgerState extends State<Burger> {
+  String date() {
+    DateTime date1 = DateTime.now();
+    print(date1.month.toString() + date1.day.toString());
+
+    String date = date1.month.toString() + date1.day.toString();
+    return date;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -97,15 +111,22 @@ class _BurgerState extends State<Burger> {
                             Radius.circular(50),
                           ),
                         ),
+                        child: Center(
+                          child: Text(
+                            userModel.name[0],
+                            style: TextStyle(color: Colors.white, fontSize: 30),
+                          ),
+                        ),
                       ),
                     ),
                     Positioned(
                       bottom: 0,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Name :'),
-                          Text('Email : '),
-                          Text('Phone : '),
+                          Text('Name : ${userModel.name}'),
+                          Text('Email : ${userModel.email}'),
+                          Text('Phone : ${userModel.phone}'),
                         ],
                       ),
                     ),
@@ -119,6 +140,7 @@ class _BurgerState extends State<Burger> {
                 leading: Icon(Icons.home),
                 title: Text('Home'),
                 onTap: () {
+                  String todayDate = date();
                   Navigator.push(
                       context, MaterialPageRoute(builder: (context) => Home()));
                 },
@@ -126,14 +148,25 @@ class _BurgerState extends State<Burger> {
               ListTile(
                 leading: Icon(Icons.calendar_view_day),
                 title: Text('Time Table'),
+                onTap: () {
+                  String todayDate = date();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TimeTable(date: todayDate)));
+                },
               ),
               ListTile(
                 leading: Icon(Icons.podcasts),
                 title: Text('Posts'),
+                onTap: () => Navigator.push(
+                    context, MaterialPageRoute(builder: (ctx) => Post())),
               ),
               ListTile(
                 leading: Icon(Icons.photo_album),
                 title: Text('Cultural'),
+                onTap: () => Navigator.push(
+                    context, MaterialPageRoute(builder: (ctx) => Cultural())),
               ),
               ListTile(
                 leading: Icon(Icons.dangerous_outlined),
@@ -145,4 +178,58 @@ class _BurgerState extends State<Burger> {
       ),
     );
   }
+}
+
+// ignore: unused_element
+Future<void> _showMyDialogError(String text, BuildContext context) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Error'),
+        content: Text(text),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Ok'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future<void> showMyDialog(String e, BuildContext context) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+          actions: [
+            TextButton(
+              child: Text('Close'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            )
+          ],
+          title: const Text('Error'),
+          content: SingleChildScrollView(
+            child: Center(
+              child: Text(e),
+            ),
+          ));
+    },
+  );
+}
+
+String date() {
+  DateTime date1 = DateTime.now();
+  print(date1.month.toString() + date1.day.toString());
+
+  String date = date1.month.toString() + date1.day.toString();
+  return date;
 }

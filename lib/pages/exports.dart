@@ -8,3 +8,4 @@ export './questions.dart';
 export './post.dart';
 export './queries.dart';
 export './pdfAndMore.dart';
+export './timeTable.dart';

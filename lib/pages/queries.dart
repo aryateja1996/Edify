@@ -8,6 +8,6 @@ class Queries extends StatefulWidget {
 class _QueriesState extends State<Queries> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold();
   }
 }

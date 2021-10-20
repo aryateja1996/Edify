@@ -1,4 +1,6 @@
 import 'package:edify/Theme.dart';
+import 'package:edify/data/data.dart';
+import 'package:edify/services/export.dart';
 import 'package:flutter/material.dart';
 
 import 'exports.dart';
@@ -19,7 +21,7 @@ class _SubState extends State<Sub> {
       body: Container(
         width: double.infinity,
         height: MediaQuery.of(context).size.height,
-        color: Colors.orange,
+        //color: Colors.orange,
         child: ListView.builder(
           itemBuilder: (context, i) {
             return Container(
@@ -27,7 +29,7 @@ class _SubState extends State<Sub> {
               margin: EdgeInsets.all(10),
               child: ListTile(
                 leading: Icon(Icons.add_box_outlined),
-                title: Text('Subjects'),
+                title: Text(subjects[userModel.sem][i]),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -39,7 +41,7 @@ class _SubState extends State<Sub> {
               ),
             );
           },
-          itemCount: 3,
+          itemCount: subjects[5].length,
         ),
       ),
     );

@@ -1,5 +1,8 @@
 import 'package:edify/Theme.dart';
-import 'package:edify/pages/exports.dart';
+import 'package:edify/pages/signup.dart';
+// ignore: unused_import
+import 'package:edify/services/export.dart';
+
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -10,6 +13,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  //final _codeController = TextEditingController();
+  String emailId;
+  String password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,17 +60,30 @@ class _LoginState extends State<Login> {
                           "Don't have an account?  ",
                           style: TextStyle(fontSize: 12, color: Colors.black54),
                         ),
-                        Text(
-                          "Register now",
-                          style: TextStyle(fontSize: 12, color: Colors.red),
+                        TextButton(
+                          child: Text(
+                            "Register now",
+                            style: TextStyle(fontSize: 12, color: Colors.red),
+                          ),
+                          onPressed: () => Navigator.push(context,
+                              MaterialPageRoute(builder: (ctx) => SignUp())),
                         ),
                       ],
                     ),
-                    SizedBox(height: 50),
-                    Input(hint: 'Email'),
+                    SizedBox(height: 20),
+                    Input(
+                      hint: 'Email',
+                      changedCallback: (String input) {
+                        emailId = input;
+                      },
+                    ),
                     SizedBox(height: 20),
                     Input(
                       hint: 'Password',
+                      dontShow: true,
+                      changedCallback: (String input) {
+                        password = input;
+                      },
                     ),
                     SizedBox(height: 40),
                     Row(
@@ -73,10 +92,7 @@ class _LoginState extends State<Login> {
                         Button(
                           text: 'Login',
                           callback: () {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(builder: (context) => Home()),
-                                (route) => false);
+                            login(emailId, password, context);
                           },
                         ),
                       ],
@@ -89,5 +105,13 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  String date() {
+    DateTime date1 = DateTime.now();
+    print(date1.month.toString() + date1.day.toString());
+
+    String date = date1.month.toString() + date1.day.toString();
+    return date;
   }
 }
